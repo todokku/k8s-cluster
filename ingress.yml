@@ -1,0 +1,35 @@
+- hosts: master
+  become: yes
+  tasks:
+   - name: initialize ingress namespace
+     shell: kubectl create namespace ingress >> namespace_created.txt
+     become_user: ubuntu
+     args:
+       chdir: $HOME
+       creates: namespace_created.txt
+
+   - name: copy ingress default backend directory
+     become_user: ubuntu
+     copy:
+       src: ingress-default-backend
+       dest: ~/
+
+   - name: deploy default backend
+     become_user: ubuntu
+     shell: kubectl create -f ~/ingress-default-backend/deployment.yml -f ~/ingress-default-backend/service.yml -n ingress>> default_backend_created.txt
+     args:
+       chdir: $HOME
+       creates: default_backend_created.txt
+    
+   - name: copy ingress deployment files
+     become_user: ubuntu
+     copy:
+      src: ingress
+      dest: ~/
+
+   - name: delpoy ingress
+     become_user: ubuntu
+     shell:  kubectl create -f ~/ingress/config-map.yml -f ~/ingress/ingress-controller-deployment.yml -n=ingress >> ingress_created.txt
+     args:
+       chdir: $HOME
+       creates: ingress_created.txt
