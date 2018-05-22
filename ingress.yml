@@ -27,6 +27,14 @@
       src: ingress
       dest: ~/
 
+   - name: deploy roles
+     become_user: ubuntu
+     shell: kubectl apply -f ~/ingress/ingress-controller-roles.yml -n=ingress >> ingress_role_created.txt
+     args:
+       chdir: $HOME
+       creates: ingress_role_created.txt
+
+
    - name: delpoy ingress
      become_user: ubuntu
      shell:  kubectl create -f ~/ingress/config-map.yml -f ~/ingress/ingress-controller-deployment.yml -n=ingress >> ingress_created.txt
