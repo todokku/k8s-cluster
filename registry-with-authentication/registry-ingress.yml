@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: registry-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: 800m
+spec:
+  backend:
+    serviceName: registry
+    servicePort: 5000
+  rules:
+  - host: REGISTRY.YOURDOMAIN.COM
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: registry
+          servicePort: 5000
+  tls:
+    - hosts:
+      - REGISTRY.YOURDOMAIN.COM
