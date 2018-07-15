@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
   name: registry
+  namespace: registry
   finalizers:
   - foregroundDeletion
 spec:
