@@ -4,6 +4,7 @@ metadata:
   labels:
     name: registry
   name: registry
+  namespace: registry
 spec:
   ports:
     - port: 5000
