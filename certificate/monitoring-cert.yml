@@ -1,19 +1,19 @@
 apiVersion: certmanager.k8s.io/v1alpha1
 kind: Certificate
 metadata:
-  name: priv-roozameh-org
-  namespace: registry
+  name: monitoring-cluster-org
+  namespace: monitoring
 spec:
-  secretName: priv-roozameh-org
+  secretName: monitoring-cluster-org
   issuerRef:
     name: letsencrypt
     kind: ClusterIssuer
-  commonName: priv.roozameh.org
+  commonName: monitoring.cluster.org
   dnsNames:
-  - priv.roozameh.org
+  - monitoring.cluster.org
   acme:
     config:
     - http01:
         ingressClass: nginx
       domains:
-      - priv.roozameh.org
+      - monitoring.cluster.org

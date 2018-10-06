@@ -11,7 +11,7 @@
       become: yes
       become_user: ubuntu
       file:
-        path: $HOME/.kube
+        path: /home/ubuntu/.kube
         state: directory
         mode: 0755
 
