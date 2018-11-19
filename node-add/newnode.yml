@@ -42,6 +42,10 @@
 - hosts: newnodes
   become: yes
   tasks:
+   - name: Setting swap off
+     shell: swapoff -a
+   - name: Setting swap off permanently
+     shell: sed -i '/ swap / s/^/#/' /etc/fstab
    - name: Install prerequisites
      apt: name={{item}} update_cache=yes
      with_items:
