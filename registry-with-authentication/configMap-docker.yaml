@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registry-config-docker
+  namespace: registry
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: registry-config-docker
+  namespace: registry
+data:
+  config.yml: |
+    version: 0.1
+    log:
+      level: debug
+      formatter: text
+      fields:
+        service: registry
+    loglevel: debug
+    storage:
+      s3:
+        accesskey: U50GP9FR3NM6P0MRVTE3
+        secretkey: ZN0mUgBGWHreQ+u72Wc4d57+LQbjH7JfICd0ScoQ
+        region: us-east-1
+        regionendpoint: http://159.69.3.17:9000
+        # Make sure you've created the following bucket.
+        bucket: registry
+        secure: true
+        v4auth: true
+        chunksize: 5242880
+        rootdirectory: /
+      delete:
+        enabled: true
+      maintenance:
+        uploadpurging:
+          enabled: true
+          age: 168h
+          interval: 24h
+          dryrun: false
+        readonly:
+          enabled: false
+    http:
+      addr: :5000

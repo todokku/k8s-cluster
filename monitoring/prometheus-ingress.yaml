@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: prometheus-ingress
+  namespace: monitoring
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/proxy-body-size: 800m
+    kubernetes.io/tls-acme: 'true'
+spec:
+  backend:
+    serviceName: monitoring-prometheus-server
+    servicePort: 80
+  rules:
+  - host: prometheus.roozameh.org
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: monitoring-prometheus-server
+          servicePort: 80
+  tls:
+  - secretName: prometheus-roozameh-org
+    hosts:
+    - prometheus.roozameh.org
