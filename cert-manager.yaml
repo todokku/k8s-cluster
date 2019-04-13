@@ -1,0 +1,26 @@
+- hosts: master
+  become: yes
+  tasks:
+#    - name: setting up cert-manager namespace
+#      become_user: ubuntu
+#      shell: kubectl create namespace cert-manager
+#    - name: labling cert-manager namespace
+#      become_user: ubuntu
+#      shell: kubectl label namespace cert-manager certmanager.k8s.io/disable-validation="true"
+    - name: setting up cert-manager CRDs
+      become_user: ubuntu
+      shell: kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.6/deploy/manifests/00-crds.yaml >> cert_manager-crd.txt
+      args:
+        chdir: $HOME
+        creates: cert_manager-crds.txt
+    - name: setting up cert-manager
+      become_user: ubuntu
+      shell: helm install --name cert-manager --namespace cert-manager stable/cert-manager >> cert_manager.txt
+      args:
+        chdir: $HOME
+        creates: cert_manager.txt
+    - name: Copying certificates to home directory
+      become_user: ubuntu
+      copy:
+        src: cert-manager
+        dest: ~/

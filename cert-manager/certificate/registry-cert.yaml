@@ -1,0 +1,19 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: registry-roozameh-org
+  namespace: registry
+spec:
+  secretName: registry-roozameh-org
+  issuerRef:
+    name: letsencrypt
+    kind: ClusterIssuer
+  commonName: registry.roozameh.org
+  dnsNames:
+  - registry.roozameh.org
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - registry.roozameh.org

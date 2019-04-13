@@ -1,0 +1,14 @@
+- hosts: master
+  become: yes
+  tasks:
+    - name: copy ingress directory
+      become_user: ubuntu
+      copy:
+        src: ingress
+        dest: ~/
+    - name: setting ingress controller
+      become_user: ubuntu
+      shell: helm install -f /home/ubuntu/ingress/ingress.yaml stable/nginx-ingress --name ingress --namespace kube-system >> ingress_controller.txt
+      args:
+        chdir: $HOME
+        creates: ingress_controller.txt
