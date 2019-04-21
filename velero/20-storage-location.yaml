@@ -1,0 +1,16 @@
+apiVersion: velero.io/v1
+kind: BackupStorageLocation
+metadata:
+  name: default
+  namespace: velero
+spec:
+  provider: aws
+  objectStorage:
+    bucket: BUCKET_NAME_HERE
+  config:
+    region: minio
+    s3ForcePathStyle: "true"
+    s3Url: "HTTP://URL-TO-S3-HERE:PORT_HERE"
+    # Uncomment the following line and provide the value of an externally
+    # available URL for downloading logs, running Velero describe, and more.
+    # publicUrl: https://minio.mycluster.com
