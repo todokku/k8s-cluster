@@ -17,16 +17,16 @@ you need to put the S3 url in this manifest.
 After applying these changes you can install velero using `kubectl create -f ./velero/*.yaml` in the root directory of the repository.
 You can verify correct installation by checking `kubectl get pods -n velero`, all the pods should be **Running**
 ## Using Velero to manage backup process
-velero has a client which you can download from [here](https://github.com/heptio/velero/releases).it very straightforward, you can create backups or restore a backup using this client.
+velero has a client which you can download from [here](https://github.com/heptio/velero/releases).it's very straightforward, you can create backups or restore a backup using this client.
 you can find good examples about velero client usage in [here](https://heptio.github.io/velero/v0.11.0/install-overview).
 
 
 ## Keep in mind
-* Velero is a very simple tools, if you encounter any problem during installation or usage, you can always try deleting the velero using `kubectl delete -f ./velero/*.yaml` and installing it again using `kubectl create -f ./velero/*.yaml` , which might fix many installation issues.
+* Velero is a very simple tool, if you encounter any problem during installation or usage, you can always try deleting the velero using `kubectl delete -f ./velero/*.yaml` and installing it again using `kubectl create -f ./velero/*.yaml`, which might fix many installation issues.
 
-* Velero use the s3 as the soure of truth, so as long as you keep the S3 safe you are good, no matter what is the state of your cluster.
+* Velero use the s3 as the source of truth, so as long as you keep the S3 safe you are good, no matter what is the state of your cluster.
 
-* It worth mentioning that velero doesn't backup node information(it's not possible) so I don't know what is the mess you're struggling with at the moment, don't expect velero to restore all your nodes back.
+* It worth mentioning that velero **doesn't** backup node information(it's not possible) so I don't know what is the mess you're struggling with at the moment, don't expect velero to restore any of your nodes back.
 
 * in many cases you might need to restore only parts of the backup, it possible using velero, read the documentation.
 * Velero backups are simply JSON manifests, so you always can restore velero backups manually.
