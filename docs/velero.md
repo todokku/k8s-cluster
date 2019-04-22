@@ -14,6 +14,9 @@ You just need to modify the following files and apply the manifests:
 you need to put the S3 credentials(secret and key) in this manifest.
 * `20-storage-location.yaml`
 you need to put the S3 url in this manifest.
+* `40-schedule.yaml`
+you should update the schedule interval according to your need, also there are many other paarmeters which can be customized in this manifest
+
 After applying these changes you can install velero using `kubectl create -f ./velero/*.yaml` in the root directory of the repository.
 You can verify correct installation by checking `kubectl get pods -n velero`, all the pods should be **Running**
 ## Using Velero to manage backup process
