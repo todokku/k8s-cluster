@@ -31,5 +31,5 @@ you can find good examples about velero client usage in [here](https://heptio.gi
 
 * It worth mentioning that velero **doesn't** backup node information(it's not possible) so I don't know what is the mess you're struggling with at the moment, don't expect velero to restore any of your nodes back.
 
-* in many cases you might need to restore only parts of the backup, it possible using velero, read the documentation.
+* in many cases you might need to restore only parts of the backup, it's possible using velero, read the documentation.
 * Velero backups are simply JSON manifests, so you always can restore velero backups manually.
